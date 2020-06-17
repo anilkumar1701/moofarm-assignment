@@ -5,7 +5,6 @@ exports.findLeastSum               = findLeastSum;
 
 async function findLeastSum(req, res) {
 	try {
-        console.log('aaaaaaa', req.body.numbers)
         let numbers = req.body.numbers;
         numbers = (Array.from(numbers, x => parseInt(x))).sort(function(a,b){return a-b});
         const split = req.body.split;
@@ -24,7 +23,6 @@ async function findLeastSum(req, res) {
     return responses.actionCompleteResponse(res, result);
 
 	} catch (error) {
-        console.log(error, error)
         responses.somethingWentWrongError(res);
 	}
 }

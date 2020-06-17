@@ -6,7 +6,6 @@ exports.calcuateWalletPrices               = calcuateWalletPrices;
 
 async function calcuateWalletPrices(req, res) {
 	try {
-        console.log('request body',req.body);
 
     var deposit = req.body.deposit, bonus =req.body.bonus, winnings =req.body.winnings;
 
@@ -21,7 +20,6 @@ async function calcuateWalletPrices(req, res) {
     service_charge = (service_charge - (service_charge * (discount/100)));
     var bonus_can_be_use = service_charge*0.1
 
-    console.log('service_charge  discount', service_charge);
 
     var wallet = (deposit + (service_charge * (10/100)) + winnings);
     if(wallet >=  service_charge){
@@ -53,19 +51,12 @@ let depositcopy = JSON.parse(JSON.stringify(deposit));
         winnings = winnings - temp_deposit;
     }
 
-    console.log('bonus >>>>>>>>>>>>>>>>>.',bonus);
-    console.log('temp_bonus >>>>>>>>>>>>>>>>>.',temp_bonus);
-    console.log('deposit >>>>>>>>>>>>>>>>>.',deposit);
-    console.log('temp_deposit >>>>>>>>>>>>>>>>>.',temp_deposit);
-    console.log('winnings >>>>>>>>>>>>>>>>>.',winnings);
-
     final_price =  bonus + deposit + winnings;
 
 
     return responses.actionCompleteResponse(res, {bonus : bonus.toFixed(2), deposit: deposit.toFixed(2), winnings: winnings.toFixed(2), total : final_price.toFixed(2)});
 
 	} catch (error) {
-        console.log(error, error)
         responses.somethingWentWrongError(res);
 	}
 }
